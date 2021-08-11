@@ -5,7 +5,10 @@ const jobTitle = document.getElementById("title");
 const tshirtColor = document.getElementById("color");
 const designChoice = document.getElementById("design");
 const activities = document.getElementById('activities');
-const totalActivities = document.getElementById('activities-cost');
+const payment = document.getElementById('payment');
+const creditCard = document.getElementById('credit-card');
+const paypal = document.getElementById('paypal');
+const bitcoin = document.getElementById('bitcoin')
 
 //sets focus to start at Name field on startup
 nameField.focus();
@@ -75,4 +78,39 @@ if(e.target.checked == false) {
   costTotal -= parseInt(e.target.dataset.cost);
 }
 totalActivities.innerHTML = `<p>Total: $${costTotal}</p>`
+})
+
+
+/*
+
+  Payment section
+
+*/ 
+
+// shows "credit card" as default when pages loads 
+payment[1].selected = true; 
+
+paypal.style.display = 'none';
+bitcoin.style.display = 'none';
+
+
+// Hides and displays the information for field selected 
+payment.addEventListener('change', (e) => {
+  if (payment[1].selected == true) {
+    creditCard.style.display = 'block';
+    paypal.style.display = 'none';
+    bitcoin.style.display = 'none';
+  }
+
+   if (payment[2].selected == true) {
+    creditCard.style.display = 'none';
+    paypal.style.display = 'block';
+    bitcoin.style.display = 'none';
+  }
+
+  if (payment[3].selected == true) {
+    creditCard.style.display = 'none';
+    paypal.style.display = 'none';
+    bitcoin.style.display = 'block';
+  }
 })
