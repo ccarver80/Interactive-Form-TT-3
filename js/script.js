@@ -4,7 +4,8 @@ const otherJobRole = document.getElementById("other-job-role");
 const jobTitle = document.getElementById("title");
 const tshirtColor = document.getElementById("color");
 const designChoice = document.getElementById("design");
-const activities = document.querySelector('#activities');
+const activities = document.getElementById('activities');
+const totalActivities = document.getElementById('activities-cost');
 
 //sets focus to start at Name field on startup
 nameField.focus();
@@ -62,8 +63,16 @@ designChoice.addEventListener("change", (e) => {
     Checkbox and cost total
 
 */
+let costTotal = parseInt("0");
 
-activities.addEventListener('change', e => {
-    console.log(activities.getAttribute('data-cost'));
+//adds total for if event is checked 
+
+activities.addEventListener("change", (e) => {
+if (e.target.checked == true) {
+  costTotal += parseInt(e.target.dataset.cost);
+}
+if(e.target.checked == false) {
+  costTotal -= parseInt(e.target.dataset.cost);
+}
+totalActivities.innerHTML = `<p>Total: $${costTotal}</p>`
 })
-
