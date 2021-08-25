@@ -1,14 +1,21 @@
 //Declare all elements
 const nameField = document.getElementById("name");
+const emailField = document.getElementById('email');
 const otherJobRole = document.getElementById("other-job-role");
 const jobTitle = document.getElementById("title");
 const tshirtColor = document.getElementById("color");
 const designChoice = document.getElementById("design");
 const activities = document.getElementById('activities');
+const totalActivities = document.getElementById('activities-cost');
+const activitiesCheckbox = document.querySelectorAll('input[type="checkbox"]');
 const payment = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
+const zipcode = document.getElementById('zip');
+const ccNum = document.getElementById('cc-num');
+const cvvNum = document.getElementById('cvv');
 const paypal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin')
+const form = document.querySelector('form'); 
 
 //sets focus to start at Name field on startup
 nameField.focus();
@@ -114,3 +121,138 @@ payment.addEventListener('change', (e) => {
     bitcoin.style.display = 'block';
   }
 })
+
+
+/*
+
+  Form Validation 
+
+*/ 
+
+const nameHint = document.getElementById('name-hint');
+const emailHint = document.getElementById('email-hint');
+const activitiesHint = document.getElementById('activities-hint');
+const ccNumHint = document.getElementById('cc-hint')
+const zipHint = document.getElementById('zip-hint');
+const cvvHint = document.getElementById('cvv-hint');
+const nameRegex = /\w+/;  //validates at least 1 character is enterd in name field 
+const emailRegex = /\w+\.?\w+@\w+\.\w+\.?\w+/ //validates basic email's like "abc@def.com", "abc.def@ghk.com" and "abc@def.com.uk"
+const creditNumberRegex = /\d{13,16}/; //validates creditcard # is between 13 and 16 digits long 
+const zipCodeRegex = /\d{5}/; //validates zipcode is 5 digits long
+const cvvRegex = /\d{3}/; //validates CVV code is 3 digits long 
+
+form.addEventListener('submit', (e) => {
+
+  //Name validation
+
+  if (nameRegex.test(nameField.value) == false) { 
+   e.preventDefault();
+   nameField.parentNode.classList.add('not-valid');
+   nameHint.style.display = 'block';
+
+  } else {
+    nameField.parentNode.classList.remove('not-valid');
+    nameField.parentNode.classList.add('valid')
+    nameHint.style.display = 'none';
+  }
+
+  // Email Validation
+
+  if (emailRegex.test(emailField.value) == false) { 
+    e.preventDefault();
+    emailField.parentNode.classList.add('not-valid'); 
+    emailHint.style.display = 'block';
+
+  } else {
+    emailField.parentNode.classList.remove('not-valid');
+    emailField.parentNode.classList.add('valid');
+    emailHint.style.display = 'none';
+
+  }
+
+  //Check box Validation
+
+  let checkbox = 'false'; 
+  for (let i = 0; i < activitiesCheckbox.length; i++) {
+    if (activitiesCheckbox[i].checked == true) {
+      checkbox = 'true'
+      break
+    } 
+  }
+    if(checkbox === 'false') {
+      e.preventDefault();
+      activities.classList.add('not-valid'); 
+      activitiesHint.style.display = 'block';
+
+    } else {
+      activities.classList.remove('not-valid');
+      activities.classList.add('valid');
+      activitiesHint.style.display = 'none';
+    }
+
+    // Credit Card Validation 
+    
+  if (payment.value === 'credit-card') {  //makes sure credit card is selected 
+
+    //validates credit card number
+
+    if(creditNumberRegex.test(ccNum.value) == false) { 
+      e.preventDefault();
+      ccNum.parentNode.classList.add('not-valid'); 
+      ccNumHint.style.display = 'block';
+
+    } else { 
+      ccNum.parentNode.classList.remove('not-valid');
+      ccNumHint.parentNode.classList.add('valid');
+      ccNumHint.style.display = 'none';
+    }
+
+    // validates zipcode
+
+    if (zipCodeRegex.test(zipcode.value) == false) {
+      e.preventDefault();
+      zipcode.parentNode.classList.add('not-valid'); 
+      zipHint.style.display = 'block';
+
+    } else {
+      zipcode.parentNode.classList.remove('not-valid');
+      zipcode.parentNode.classList.add('valid');
+      zipHint.style.display = 'none';
+    }
+
+    // validates CVV code
+
+    if (cvvRegex.test(cvvNum.value) == false) { 
+      e.preventDefault();
+      cvvNum.parentNode.classList.add('not-valid'); 
+      cvvHint.style.display = 'block';
+
+    } else {
+      cvvNum.parentNode.classList.remove('not-valid');
+      cvvNum.parentNode.classList.add('valid');
+      cvvHint.style.display = 'none';
+    }
+  }
+
+})
+
+/*
+
+    Accessibility
+
+*/
+
+activities.addEventListener('focusin', (e) => {
+  e.target.parentNode.classList.add('focus');
+})
+
+activities.addEventListener('focusout', (e) => {
+  e.target.parentNode.classList.remove('focus');
+})
+
+
+/*
+
+  EXTRA Credit
+
+*/
