@@ -119,9 +119,8 @@ const creditNumberRegex = /\d{13,16}/; //validates creditcard # is between 13 an
 const zipCodeRegex = /\d{5}/; //validates zipcode is 5 digits long
 const cvvRegex = /\d{3}/; //validates CVV code is 3 digits long
 
-
-// Validates in real time when user goes to start typing "Name" 
-nameField.addEventListener('keyup', (e) => {
+// Validates in real time when user goes to start typing "Name"
+nameField.addEventListener("keyup", (e) => {
   if (nameRegex.test(nameField.value) == false) {
     nameField.parentNode.classList.add("not-valid");
     nameHint.style.display = "block";
@@ -130,11 +129,10 @@ nameField.addEventListener('keyup', (e) => {
     nameField.parentNode.classList.add("valid");
     nameHint.style.display = "none";
   }
-})
+});
 
-//Validates in real time when user goes to start typing "Email" 
-emailField.addEventListener('keyup', (e) => {
-
+//Validates in real time when user goes to start typing "Email"
+emailField.addEventListener("keyup", (e) => {
   if (emailRegex.test(emailField.value) == false) {
     emailField.parentNode.classList.add("not-valid");
     emailHint.style.display = "block";
@@ -143,16 +141,13 @@ emailField.addEventListener('keyup', (e) => {
     emailField.parentNode.classList.add("valid");
     emailHint.style.display = "none";
   }
-
-})
+});
 
 //Validates entire form when submitted
 form.addEventListener("submit", (e) => {
-
   //Name Validation
   if (nameRegex.test(nameField.value) == false) {
-    
-    e.preventDefault()
+    e.preventDefault();
     nameField.parentNode.classList.add("not-valid");
     nameHint.style.display = "block";
   } else {
@@ -163,10 +158,10 @@ form.addEventListener("submit", (e) => {
 
   //Email Validation
   if (emailRegex.test(emailField.value) == false) {
-    if (emailField.value === '') {
+    if (emailField.value === "") {
       alert("Email field cannot be blank");
     } else {
-      alert('Email address is not correct, please try to format again');
+      alert("Email address is not correct, please try to format again");
     }
     e.preventDefault();
     emailField.parentNode.classList.add("not-valid");
@@ -176,7 +171,7 @@ form.addEventListener("submit", (e) => {
     emailField.parentNode.classList.add("valid");
     emailHint.style.display = "none";
   }
-  
+
   //Check box Validation
   let checkbox = "false";
   for (let i = 0; i < activitiesCheckbox.length; i++) {
@@ -196,8 +191,9 @@ form.addEventListener("submit", (e) => {
   }
 
   // Credit Card Validation
-  if (payment.value === "credit-card") { //makes sure credit card is selected
-  
+  if (payment.value === "credit-card") {
+    //makes sure credit card is selected
+
     //validates credit card number
     if (creditNumberRegex.test(ccNum.value) == false) {
       e.preventDefault();
@@ -279,7 +275,7 @@ activities.addEventListener("change", (e) => {
     }
   }
 
-     /*
+  /*
         ADD COST TOTAL
 
       */
