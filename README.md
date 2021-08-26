@@ -1,5 +1,7 @@
 # Interactive-Form-TT-3
-Interactive HTML Form Team Treehouse Project #3
+This is the third project for the FSJS Tech Degree, An interactive form. The HTML and CSS was already provided by Team Treehouse. My assigment was to 
+add interactivity to the form. 
+
 
 ## Real-time error message:
 I created both the name and email field to show a real time error as soon as 1 letter is typed. 
